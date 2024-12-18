@@ -35,10 +35,10 @@ def generate_branding_snippet(prompt: str) -> str:
 
     response = client.chat.completions.create(
         messages=[
-            # {
-            #     "role": "system",
-            #     "content": "You are a seasoned writer that also as experience in the marketing worls. You are tasked with coming up with branding snippets"
-            # },
+            {
+                "role": "system",
+                "content": "You are a seasoned writer that also as experience in the marketing world. You are tasked with coming up with branding snippets. Generate a branding snippet. Avoid any introductory or header messages, and provide the snippet directly"
+            },
             {
                 "role": "user",
                 "content": f"Generate a branding snippet for {prompt}"
@@ -66,10 +66,10 @@ def generate_keywords(prompt: str) -> list [str]:
 
     response = client.chat.completions.create(
         messages=[
-            # {
-            #     "role": "system",
-            #     "content": "You are a seasoned writer that also as experience in the marketing world. You are tasked with coming up with branding keywords"
-            # },
+            {
+                "role": "system",
+                "content": "You are a seasoned writer that also as experience in the marketing world. You are tasked with coming up with branding keywords. Provide a list of branding keywords avoiding any introductory or header messages. The response should directly list the keywords without numbering."
+            },
             {
                 "role": "user",
                 "content": f"Generate branding keywords for {prompt}"
