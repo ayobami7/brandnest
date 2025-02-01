@@ -53,7 +53,7 @@ This project is a **Branding Snippets Generator**, designed to create branding s
 2. Set up a Python virtual environment:
    ```bash
    python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
+   source venv/bin/activate   # On Windows: venv/Scripts/activate
    ```
 
 3. Install the dependencies:
@@ -69,7 +69,11 @@ This project is a **Branding Snippets Generator**, designed to create branding s
 
 5. Run the application:
    ```bash
-   python app.py --input "Your branding idea here"
+   python brandnest.py --input "Your branding idea here"
+   ```
+   OR
+   ```bash
+   uvicorn brandnest_api:app --reload
    ```
 
 ---
@@ -79,7 +83,7 @@ This project is a **Branding Snippets Generator**, designed to create branding s
 ### CLI Mode
 1. Provide your input through the command line:
    ```bash
-   python app.py --input "Your branding input"
+   python brandnest.py --input "Your branding input"
    ```
 
 2. Outputs:

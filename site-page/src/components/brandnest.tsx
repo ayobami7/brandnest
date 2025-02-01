@@ -6,32 +6,72 @@ import PromptResult from './result'
 
 const Brandnest = () => {
   const [prompt, setPrompt] = useState('')
-  const [snippet, setSnippet]= useState("")
-  const [keywords, setKeywords] =useState([])
+  const [snippet, setSnippet] = useState("")
+  const [keywords, setKeywords] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const BASE_URL = "http://127.0.0.1:8000"
 
-  const onSubmit= ()=>{
-    console.log("prompt:",prompt)
-    // const result = fetch(`${process.env.BASE_URL}/generate_snippets_and_keywords?prompt=${prompt}`)
-    fetch(`${BASE_URL}/generate_snippets_and_keywords?prompt=${prompt}`).then((res)=>res.json()).then(onResult)
+  const onSubmit = async () => {
+    if (!prompt.trim()) {
+      setError("Please enter a prompt.")
+      return
+    }
+
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch(`${BASE_URL}/generate_snippets_and_keywords?prompt=${encodeURIComponent(prompt)}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      onResult(data)
+    } catch (error) {
+      setError("An error occurred while fetching the data. Please try again.")
+      console.error("Fetch error:", error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const onResult = (data: any) => {
     setSnippet(data.snippet)
-    setKeywords(data.Keywords)
+    setKeywords(data.keywords || [])
   }
 
   return (
-    <div className='border p-2 m-2 rounded-md w-[90%]'>
-        <h1>Brandnest</h1>
-        <h2>Your AI Branding Assistant</h2>
-        <p>Let me help you with generating branding ideas for your product <br /> 
-          Tell me what ypur brand is about
-        </p>
-        <PromptForm prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit}/>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+        <div className="p-6 sm:p-8">
+          <h1 className="text-4xl font-bold text-purple-900 mb-2">Brandnest</h1>
+          <h2 className="text-xl text-purple-700 mb-4">Your AI Branding Assistant</h2>
+          <p className="text-gray-600 mb-6">
+            Let me help you with generating branding ideas for your product. <br />
+            Tell me what your brand is about.
+          </p>
 
-        <PromptResult prompt={prompt} snippet={snippet} keywords={keywords} />
+          <PromptForm prompt={prompt} setPrompt={setPrompt} onSubmit={onSubmit} />
+
+          {isLoading && (
+            <div className="mt-6 flex justify-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
+            </div>
+          )}
+
+          {error && (
+            <div className="mt-6 text-red-500 text-center">
+              {error}
+            </div>
+          )}
+
+          {snippet && (
+            <PromptResult prompt={prompt} snippet={snippet} keywords={keywords} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

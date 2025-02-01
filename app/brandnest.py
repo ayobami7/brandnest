@@ -9,7 +9,7 @@ MAX_INPUT_LENGTH = 32
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", "-i", type=str, required=True)
+    parser.add_argument("--input", "-i", type=str, required=False)
     args = parser.parse_args()
     user_input = args.input
 

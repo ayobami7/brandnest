@@ -1,41 +1,40 @@
 'use client';
 
-import React, { useState } from 'react'
-// import axios from "axios";
+import React from 'react'
 
-interface PromptFormDetails{
+interface PromptFormDetails {
   prompt: string;
-  setPrompt: any;
+  setPrompt: (prompt: string) => void;
   onSubmit: () => void
 }
-
 
 const PromptForm = ({
   prompt,
   setPrompt,
   onSubmit
-}:PromptFormDetails) => {
-  
+}: PromptFormDetails) => {
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSubmit()
+  }
+
   return (
-    <div>
-        {/* <form action=""> */}
-            <label htmlFor="promptform"></label>
-            <input 
-                id="promptform"
-                type="text"
-                value={prompt}
-                onChange={(e)=> setPrompt(e.target.value)}
-                placeholder='coffee' 
-                className='text-black'
-            />
-            <button 
-              // type="submit"
-              onClick={onSubmit}
-            >
-              Submit
-            </button>
-        {/* </form> */}
-    </div>
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+      <input
+        type="text"
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        placeholder="e.g., coffee shop, eco-friendly products"
+        className="flex-grow p-3 border border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      />
+      <button
+        type="submit"
+        className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+      >
+        Generate Ideas
+      </button>
+    </form>
   )
 }
 
