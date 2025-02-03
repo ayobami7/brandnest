@@ -46,7 +46,7 @@ const Brandnest = () => {
 
   return (
     <div className="h-[100vh] w-full bg-gradient-to-br from-purple-50 to-blue-50">
-      <div className="flex items-center justify-center mt-10 w-[600px] mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+      <div className="flex items-center justify-center mt-10 w-[350px] md:w-[600px] mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         <div className="p-6 sm:p-8">
           <h1 className="text-4xl font-bold text-purple-900 mb-2">Brandnest</h1>
           <h2 className="text-xl text-purple-700 mb-4">Your AI Branding Assistant</h2>
