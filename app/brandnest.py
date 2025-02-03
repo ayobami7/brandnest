@@ -59,8 +59,8 @@ def generate_branding_snippet(prompt: str) -> str:
 
 def generate_keywords(prompt: str) -> list [str]:
     client = Groq(
-        api_key = "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"
-        # api_key=os.environ.get("GROQ_API_KEY")
+        # api_key = "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"
+        api_key=os.environ.get("GROQ_API_KEY")
         )
 
     response = client.chat.completions.create(

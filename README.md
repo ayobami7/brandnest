@@ -73,7 +73,7 @@ This project is a **Branding Snippets Generator**, designed to create branding s
    ```
    OR
    ```bash
-   uvicorn brandnest_api:app --reload
+   uvicorn brandnest_api:app --reload [ --host 0.0.0.0 --port 80 ] 
    ```
 
 ---

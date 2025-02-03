@@ -11,7 +11,7 @@ const Brandnest = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const BASE_URL = "http://127.0.0.1:8000"
+  const BASE_URL = "https://brandnest.onrender.com"
 
   const onSubmit = async () => {
     if (!prompt.trim()) {
@@ -28,6 +28,7 @@ const Brandnest = () => {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
       const data = await response.json()
+      console.log("data:", data)
       onResult(data)
     } catch (error) {
       setError("An error occurred while fetching the data. Please try again.")
@@ -36,15 +37,16 @@ const Brandnest = () => {
       setIsLoading(false)
     }
   }
+  
 
   const onResult = (data: any) => {
     setSnippet(data.snippet)
-    setKeywords(data.keywords || [])
+    setKeywords(data.Keywords || [])
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+    <div className="h-[100vh] w-full bg-gradient-to-br from-purple-50 to-blue-50">
+      <div className="flex items-center justify-center mt-10 w-[600px] mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         <div className="p-6 sm:p-8">
           <h1 className="text-4xl font-bold text-purple-900 mb-2">Brandnest</h1>
           <h2 className="text-xl text-purple-700 mb-4">Your AI Branding Assistant</h2>
