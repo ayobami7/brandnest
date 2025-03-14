@@ -1,4 +1,5 @@
 # Branding Snippets Generator
+![b2](https://github.com/user-attachments/assets/d04a9713-0dc4-4de8-b824-5575b0ba8cd9)
 
 ## Overview
 This project is a **Branding Snippets Generator**, designed to create branding snippets and keywords for given user inputs. The backend is built using **Python** and leverages **Groq** for AI-based completions. The frontend will be implemented using **TypeScript**, **Next.js**, and **React**.
